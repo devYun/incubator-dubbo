@@ -52,7 +52,8 @@ public class ReferenceConfigTest {
 
         try {
             demoService.export();
-            rc.get();
+            DemoService demoService1 = rc.get();
+            System.out.println(demoService1.sayName("aa"));
             Assert.assertTrue(!Constants.LOCAL_PROTOCOL.equalsIgnoreCase(
                     rc.getInvoker().getUrl().getProtocol()));
         } finally {

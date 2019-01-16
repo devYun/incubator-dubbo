@@ -67,7 +67,7 @@ public class DubboProtocolTest {
     public void testDubboProtocol() throws Exception {
         DemoService service = new DemoServiceImpl();
         protocol.export(proxy.getInvoker(service, DemoService.class, URL.valueOf("dubbo://127.0.0.1:9010/" + DemoService.class.getName())));
-        service = proxy.getProxy(protocol.refer(DemoService.class, URL.valueOf("dubbo://127.0.0.1:9010/" + DemoService.class.getName()).addParameter("timeout", 3000l)));
+        service = proxy.getProxy(protocol.refer(DemoService.class, URL.valueOf("dubbo://127.0.0.1:9010/" + DemoService.class.getName()).addParameter("timeout", 300000l)));
         assertEquals(service.enumlength(new Type[]{}), Type.Lower);
         assertEquals(service.getSize(null), -1);
         assertEquals(service.getSize(new String[]{"", "", ""}), 3);
@@ -78,7 +78,7 @@ public class DubboProtocolTest {
         assertEquals(set.iterator().next(), "aa");
         service.invoke("dubbo://127.0.0.1:9010/" + DemoService.class.getName() + "", "invoke");
 
-        service = proxy.getProxy(protocol.refer(DemoService.class, URL.valueOf("dubbo://127.0.0.1:9010/" + DemoService.class.getName() + "?client=netty").addParameter("timeout", 3000l)));
+        service = proxy.getProxy(protocol.refer(DemoService.class, URL.valueOf("dubbo://127.0.0.1:9010/" + DemoService.class.getName() + "?client=netty").addParameter("timeout", 300000l)));
         // test netty client
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < 1024 * 32 + 32; i++)

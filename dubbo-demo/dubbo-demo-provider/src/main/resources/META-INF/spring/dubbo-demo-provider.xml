@@ -32,8 +32,13 @@
 
     <!-- service implementation, as same as regular local bean -->
     <bean id="demoService" class="org.apache.dubbo.demo.provider.DemoServiceImpl"/>
+    <bean id="DubboMergeService1Impl" class="org.apache.dubbo.demo.provider.DubboMergeService1Impl"/>
+    <bean id="DubboMergeService2Impl" class="org.apache.dubbo.demo.provider.DubboMergeService2Impl"/>
 
     <!-- declare the service interface to be exported -->
-    <dubbo:service interface="org.apache.dubbo.demo.DemoService" ref="demoService"/>
+    <dubbo:service  interface="org.apache.dubbo.demo.DemoService" ref="demoService"/>
+
+    <dubbo:service group="new" interface="org.apache.dubbo.demo.IDubboMergeService" ref="DubboMergeService1Impl"/>
+    <dubbo:service group="old" interface="org.apache.dubbo.demo.IDubboMergeService" ref="DubboMergeService2Impl"/>
 
 </beans>

@@ -16,9 +16,12 @@
  */
 package org.apache.dubbo.demo.consumer;
 
-import org.apache.dubbo.demo.DemoService;
 
+import org.apache.dubbo.demo.DemoService;
+import org.apache.dubbo.demo.IDubboMergeService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Map;
 
 public class Consumer {
 
@@ -29,6 +32,7 @@ public class Consumer {
      */
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
+        //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-injvm.xml"});
         context.start();
         DemoService demoService = (DemoService) context.getBean("demoService"); // get remote service proxy
         while (true) {
@@ -40,5 +44,21 @@ public class Consumer {
                 throwable.printStackTrace();
             }
         }
+
+        //分组聚合
+        //IDubboMergeService mergeService=(IDubboMergeService) context.getBean("mergeService");
+        //for (String string : mergeService.groupArray()) {
+        //    System.out.println(string);
+        //}
+        //for (String string : mergeService.groupList()) {
+        //    System.out.println(string);
+        //}
+        //for (Map.Entry<String, Object> entry : mergeService.groupMap().entrySet()) {
+        //    String key = entry.getKey();
+        //    Object value=entry.getValue();
+        //    System.out.println(key+" "+value);
+        //}
+
+
     }
 }
